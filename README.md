@@ -1,8 +1,8 @@
-# The Perfect Date (Rails API) wakatime
+# The Perfect Date (Rails API) [![wakatime](https://wakatime.com/badge/github/irackson/canvashub_api.svg)](https://wakatime.com/badge/github/irackson/canvashub_api)
 
 ## Frontend URLS
 
--   netlify
+-   [netlify](https://laughing-johnson-bfde47.netlify.app/)
 -   <https://canvashub.ianrackson.com/>
 
 ## Backend URLS
