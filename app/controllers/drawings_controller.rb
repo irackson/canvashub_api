@@ -1,5 +1,5 @@
 class DrawingsController < ApplicationController
-  before_action :set_drawing, only: [:show, :update, :destroy]
+  before_action :set_drawing, only: %i[show update destroy]
 
   # GET /drawings
   def index
@@ -10,7 +10,7 @@ class DrawingsController < ApplicationController
 
   # GET /drawings/1
   def show
-    render json: @drawing
+    render json: @drawing.to_json(include: :images)
   end
 
   # POST /drawings
@@ -39,13 +39,14 @@ class DrawingsController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_drawing
-      @drawing = Drawing.find(params[:id])
-    end
 
-    # Only allow a list of trusted parameters through.
-    def drawing_params
-      params.require(:drawing).permit(:title, :creator, :height, :checked_out)
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_drawing
+    @drawing = Drawing.find(params[:id])
+  end
+
+  # Only allow a list of trusted parameters through.
+  def drawing_params
+    params.require(:drawing).permit(:title, :creator, :height, :checked_out)
+  end
 end

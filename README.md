@@ -31,3 +31,7 @@ Things you may want to cover:
 -   Deployment instructions
 
 -   ...
+
+Resources:
+
+-   <https://seir-perseverance.netlify.app/second-language/week-2/day-3/lecture-materials/rails-one-to-many>
