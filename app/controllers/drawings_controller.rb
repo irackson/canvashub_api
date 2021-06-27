@@ -1,6 +1,6 @@
 class DrawingsController < ApplicationController
   before_action :set_drawing, only: %i[show update destroy]
-  @minimum_time = 60 * 5
+
   # GET /drawings
   def index
     @drawings = Drawing.all
@@ -36,11 +36,12 @@ class DrawingsController < ApplicationController
 
   # DELETE /drawings/1
   def destroy
+    minimum_time = 1000 * 5
     time_since_modified = Time.now - @drawing.updated_at
-    if time_since_modified <= @minimum_time
+    if time_since_modified <= minimum_time
       @drawing.destroy
     else
-      render(status: 409, json: { message: "cannot delete as more than #{@minimum_time} seconds have passed since creation" })
+      render(status: 409, json: { message: "cannot delete as more than #{minimum_time} seconds have passed since creation" })
     end
   end
 
