@@ -5,7 +5,7 @@ class CreateDrawings < ActiveRecord::Migration[6.1]
       t.string :creator
       t.integer :height
       t.integer :width
-      t.boolean :checked_out
+      t.boolean :checked_out, default: true
 
       t.timestamps
     end
