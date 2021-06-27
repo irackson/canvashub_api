@@ -17,6 +17,7 @@ class ImagesController < ApplicationController
   def create
     @image = Image.new(image_params)
     @image.drawing_id = params[:drawing_id]
+    puts @image
 
     if @image.save
       render json: @image, status: :created
@@ -48,6 +49,6 @@ class ImagesController < ApplicationController
 
   # Only allow a list of trusted parameters through.
   def image_params
-    params.require(:image).permit(:reds, :greens, :blues, :alphas)
+    params.require(:image).permit(:bytes)
   end
 end

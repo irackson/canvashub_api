@@ -1,34 +1,34 @@
-require "test_helper"
+require 'test_helper'
 
 class ImagesControllerTest < ActionDispatch::IntegrationTest
   setup do
     @image = images(:one)
   end
 
-  test "should get index" do
+  test 'should get index' do
     get images_url, as: :json
     assert_response :success
   end
 
-  test "should create image" do
+  test 'should create image' do
     assert_difference('Image.count') do
-      post images_url, params: { image: { alphas: @image.alphas, blues: @image.blues, greens: @image.greens, reds: @image.reds } }, as: :json
+      post images_url, params: { image: { bytes: @image.bytes } }, as: :json
     end
 
     assert_response 201
   end
 
-  test "should show image" do
+  test 'should show image' do
     get image_url(@image), as: :json
     assert_response :success
   end
 
-  test "should update image" do
-    patch image_url(@image), params: { image: { alphas: @image.alphas, blues: @image.blues, greens: @image.greens, reds: @image.reds } }, as: :json
+  test 'should update image' do
+    patch image_url(@image), params: { image: { bytes: @image.bytes } }, as: :json
     assert_response 200
   end
 
-  test "should destroy image" do
+  test 'should destroy image' do
     assert_difference('Image.count', -1) do
       delete image_url(@image), as: :json
     end

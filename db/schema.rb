@@ -26,10 +26,7 @@ ActiveRecord::Schema.define(version: 2021_06_26_195740) do
   end
 
   create_table "images", force: :cascade do |t|
-    t.integer "reds", default: [], array: true
-    t.integer "greens", default: [], array: true
-    t.integer "blues", default: [], array: true
-    t.integer "alphas", default: [], array: true
+    t.integer "bytes", default: [], array: true
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.integer "drawing_id"

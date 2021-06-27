@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  resources :images, only: [:index]
+  # resources :images, only: [:index]
   resources :drawings, only: %i[index show create destroy update] do
     resources :images, only: [:create]
   end
