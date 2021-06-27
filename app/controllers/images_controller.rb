@@ -15,30 +15,34 @@ class ImagesController < ApplicationController
 
   # POST /images
   def create
-    @image = Image.new(image_params)
-    @image.drawing_id = params[:drawing_id]
-    puts @image
-
-    if @image.save
-      render json: @image, status: :created
+    drawing = Drawing.find(params[:drawing_id])
+    if drawing[:checked_out]
+      @image = Image.new(image_params)
+      @image.drawing_id = params[:drawing_id]
+      if @image.save
+        drawing.update({ checked_out: false })
+        render json: @image, status: :created
+      else
+        render json: @image.errors, status: :unprocessable_entity
+      end
     else
-      render json: @image.errors, status: :unprocessable_entity
+      render(status: 409, json: { message: 'the drawing you are trying to edit has not been checked out' })
     end
   end
 
   # PATCH/PUT /images/1
-  def update
-    if @image.update(image_params)
-      render json: @image
-    else
-      render json: @image.errors, status: :unprocessable_entity
-    end
-  end
+  # def update
+  #   if @image.update(image_params)
+  #     render json: @image
+  #   else
+  #     render json: @image.errors, status: :unprocessable_entity
+  #   end
+  # end
 
-  # DELETE /images/1
-  def destroy
-    @image.destroy
-  end
+  # # DELETE /images/1
+  # def destroy
+  #   @image.destroy
+  # end
 
   private
 
