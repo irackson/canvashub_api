@@ -38,12 +38,14 @@ class DrawingsController < ApplicationController
 
   # DELETE /drawings/1
   def destroy
-    minimum_time = 1000 * 5
+    minimum_time = 60 * 5 # 1min * number of minutes (react env)
+    minimum_num = 3
     time_since_modified = Time.now - @drawing.updated_at
-    if time_since_modified <= minimum_time
+    puts time_since_modified
+    if (@drawing.images.length <= minimum_num) || ((@drawing.images.length > minimum_num) && (time_since_modified >= minimum_time))
       @drawing.destroy
     else
-      render(status: 409, json: { message: "cannot delete as more than #{minimum_time} seconds have passed since creation" })
+      render(status: 409, json: { message: "cannot delete as less than #{minimum_time} seconds have passed since last update" })
     end
   end
 
