@@ -26,15 +26,15 @@ class DrawingsController < ApplicationController
   end
 
   # PATCH/PUT /drawings/1
-  def update
-    if @drawing[:checked_out]
-      render(status: 409, json: { message: 'drawing is currently checked out so edits cannot be made at this time' })
-    elsif @drawing.update(update_params)
-      render json: @drawing
-    else
-      render json: @drawing.errors, status: :unprocessable_entity
-    end
-  end
+  # def update
+  #   if @drawing[:checked_out]
+  #     render(status: 409, json: { message: 'drawing is currently checked out so edits cannot be made at this time' })
+  #   elsif @drawing.update(update_params)
+  #     render json: @drawing
+  #   else
+  #     render json: @drawing.errors, status: :unprocessable_entity
+  #   end
+  # end
 
   # DELETE /drawings/1
   def destroy
