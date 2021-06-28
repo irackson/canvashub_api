@@ -41,11 +41,7 @@ class DrawingsController < ApplicationController
     minimum_time = 1000 * 5
     time_since_modified = Time.now - @drawing.updated_at
     if time_since_modified <= minimum_time
-      if @drawing[:checked_out]
-        render(status: 409, json: { message: 'although this drawing was created recently, someone is currently editing it so it cannot be destroyed at this time' })
-      else
-        @drawing.destroy
-      end
+      @drawing.destroy
     else
       render(status: 409, json: { message: "cannot delete as more than #{minimum_time} seconds have passed since creation" })
     end
