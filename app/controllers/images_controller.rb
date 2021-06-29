@@ -23,7 +23,7 @@ class ImagesController < ApplicationController
       @image.drawing_id = params[:drawing_id]
       if @image.save
         drawing.update({ checked_out: !drawing[:checked_out] })
-        render json: @image, status: :created
+        render json: { drawing_id: @image.drawing_id }, status: :created
       else
         render json: @image.errors, status: :unprocessable_entity
       end
