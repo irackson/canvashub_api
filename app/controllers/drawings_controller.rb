@@ -26,28 +26,26 @@ class DrawingsController < ApplicationController
   end
 
   # PATCH/PUT /drawings/1
-  def update
-    if @drawing[:checked_out]
-      render(status: 409, json: { message: 'drawing is currently checked out so edits cannot be made at this time' })
-    elsif @drawing.update(update_params)
-      render json: @drawing
-    else
-      render json: @drawing.errors, status: :unprocessable_entity
-    end
-  end
+  # def update
+  #   if @drawing[:checked_out]
+  #     render(status: 409, json: { message: 'drawing is currently checked out so edits cannot be made at this time' })
+  #   elsif @drawing.update(update_params)
+  #     render json: @drawing
+  #   else
+  #     render json: @drawing.errors, status: :unprocessable_entity
+  #   end
+  # end
 
   # DELETE /drawings/1
   def destroy
-    minimum_time = 1000 * 5
+    minimum_time = 60 * 5 # 1min * number of minutes (react env)
+    minimum_num = 3
     time_since_modified = Time.now - @drawing.updated_at
-    if time_since_modified <= minimum_time
-      if @drawing[:checked_out]
-        render(status: 409, json: { message: 'although this drawing was created recently, someone is currently editing it so it cannot be destroyed at this time' })
-      else
-        @drawing.destroy
-      end
+    puts time_since_modified
+    if (@drawing.images.length <= minimum_num) || ((@drawing.images.length > minimum_num) && (time_since_modified >= minimum_time))
+      @drawing.destroy
     else
-      render(status: 409, json: { message: "cannot delete as more than #{minimum_time} seconds have passed since creation" })
+      render(status: 409, json: { message: "cannot delete as less than #{minimum_time} seconds have passed since last update" })
     end
   end
 

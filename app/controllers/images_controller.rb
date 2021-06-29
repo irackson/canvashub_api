@@ -16,17 +16,19 @@ class ImagesController < ApplicationController
   # POST /images
   def create
     drawing = Drawing.find(params[:drawing_id])
-    if drawing[:checked_out]
+    puts 'checkout time'
+    puts((drawing[:updated_at] - Time.parse(params[:checkout_time])))
+    if (drawing[:updated_at] - Time.parse(params[:checkout_time])) < 1
       @image = Image.new(image_params)
       @image.drawing_id = params[:drawing_id]
       if @image.save
-        drawing.update({ checked_out: false })
-        render json: @image, status: :created
+        drawing.update({ checked_out: !drawing[:checked_out] })
+        render json: { drawing_id: @image.drawing_id }, status: :created
       else
         render json: @image.errors, status: :unprocessable_entity
       end
     else
-      render(status: 409, json: { message: 'the drawing you are trying to edit has not been checked out' })
+      render(status: 409, json: { message: 'a new commit has been made since you began editing' })
     end
   end
 
