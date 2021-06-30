@@ -12,7 +12,7 @@ class ImagesControllerTest < ActionDispatch::IntegrationTest
 
   test 'should create image' do
     assert_difference('Image.count') do
-      post images_url, params: { image: { bytes: @image.bytes } }, as: :json
+      post images_url, params: { image: { data_url: @image.data_url, commit_message: @image.commit_message, commit_author: @image.commit_author } }, as: :json
     end
 
     assert_response 201
@@ -24,7 +24,7 @@ class ImagesControllerTest < ActionDispatch::IntegrationTest
   end
 
   test 'should update image' do
-    patch image_url(@image), params: { image: { bytes: @image.bytes } }, as: :json
+    patch image_url(@image), params: { image: { data_url: @image.data_url, commit_message: @image.commit_message, commit_author: @image.commit_author } }, as: :json
     assert_response 200
   end
 
