@@ -1,7 +1,11 @@
 # Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-    bytes:
+    data_url:
+    commit_message:
+    commit_author:
 
 two:
-    bytes:
+    data_url:
+    commit_message:
+    commit_author:
