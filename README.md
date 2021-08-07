@@ -1,4 +1,4 @@
-# The Perfect Date (Rails API) [![wakatime](https://wakatime.com/badge/github/irackson/canvashub_api.svg)](https://wakatime.com/badge/github/irackson/canvashub_api)
+# CanvasHub (Rails API) [![wakatime](https://wakatime.com/badge/github/irackson/canvashub_api.svg)](https://wakatime.com/badge/github/irackson/canvashub_api)
 
 ## Frontend URLS
 
